@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script src="socket.io.js"></script>
+      
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+      <div id = 'phFiled'></div>
+  </body>
+    
+    <script>
+        var phFiled = document.getElementById("phFiled"); 
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+        
+      </script>
+</html>
