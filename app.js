@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index')//(io);
+var routes = require('./routes/index') //(io);
 var users = require('./routes/users');
 
 var app = express();
@@ -129,14 +129,37 @@ var io = require('socket.io').listen(server);
 var socketManager = require('./models/sockets_manager.js');
 var sensorManager = require('./models/sensor_manager.js');
 
-for(var i =0;i<10000;i++){
-    (function(i){
-    setTimeout(function(){
-        //console.log('f')
-        socketManager.liveSensorsMonitoring(io, 'xxxxxx')
-    },100*i)
-})(i)
-}
+
+//console.log('f')
+
+
+io.sockets.on('connection', function (socket) {
+    sensorManager.startMonitorMock(io, function () {
+        console.log(11111111111111)
+
+    })
+    setInterval(function () {
+        sensorManager.startMonitorMock()
+        .then(function (xxx) {
+            console.log(xxx);
+            socket.emit('news', xxx);
+
+        })
+    }, 1000)
+
+    socket.on('my other event', function (data) {
+        console.log(data);
+    });
+
+});
+
+
+
+
+//   socketManager.liveSensorsMonitoring(io, 'xxxxxx')
+
+
+
 
 
 sensorManager.startMonitorMock(io, 'xxxxxx')
