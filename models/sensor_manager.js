@@ -52,13 +52,13 @@ var sensorManager = {
         io.sockets.on('connection', function (socket) {
             socket.emit('news', data);
             socket.on('my other event', function (data) {
-                //  console.log(data);
+                  console.log(data);
             });
 
         });
             //console.log(dataCeltius);
             sensorManager.writeData(data)
-        },   1000)
+        },   10000)
     }
 }
 

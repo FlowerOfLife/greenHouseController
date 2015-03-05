@@ -23,7 +23,7 @@ var socketsManagerClass = {
                 b:52
             });
             socket.on('my other event', function (data) {
-                //  console.log(data);
+                  console.log(data);
             });
 
         });

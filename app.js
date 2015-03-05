@@ -128,7 +128,17 @@ var server = app.listen(app.get('port'), function () {
 var io = require('socket.io').listen(server);
 var socketManager = require('./models/sockets_manager.js');
 var sensorManager = require('./models/sensor_manager.js');
-socketManager.liveSensorsMonitoring(io, 'xxxxxx')
+
+for(var i =0;i<10000;i++){
+    (function(i){
+    setTimeout(function(){
+        //console.log('f')
+        socketManager.liveSensorsMonitoring(io, 'xxxxxx')
+    },100*i)
+})(i)
+}
+
+
 sensorManager.startMonitorMock(io, 'xxxxxx')
 
 
