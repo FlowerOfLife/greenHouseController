@@ -11,3 +11,27 @@ console.log(app)
 });
 
 module.exports = router;
+
+
+/*
+
+
+
+module.exports = function(io) {
+  return router.get('/', function(req, res) {
+    if(!req.user || req.user.status !== 'ENABLED') {
+      return res.redirect('/login');
+    }
+
+    // emit to all connected sockets that the user is loading the page
+    io.emit('user-connecting', { name: req.user.name });
+
+    res.render('home', {
+      title: 'Home',
+      user: req.user
+    });
+  });
+}
+
+
+*/

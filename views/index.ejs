@@ -11,12 +11,13 @@
     <p>Welcome to <%= title %></p>
       <div id = 'phFiled'></div>
   </body>
-    
+    <div id='dataDiv'></div>
     <script>
-        var phFiled = document.getElementById("phFiled"); 
+  var phFiled = document.getElementById("phFiled"); 
   var socket = io.connect('http://localhost');
   socket.on('news', function (data) {
     console.log(data);
+      document.getElementById('dataDiv').innerHTML=(data.ph)
     socket.emit('my other event', { my: 'data' });
   });
         

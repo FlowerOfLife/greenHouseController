@@ -12,6 +12,9 @@ var temperatureSensorClass = {
             var myData = (((this.value * 5) / 1024) - 0.5) * 100;
             callback(celsius)
         });
+    },
+    randomTempData:function(){
+    return Math.floor((Math.random() * 99) + 1);
     }
 
 }

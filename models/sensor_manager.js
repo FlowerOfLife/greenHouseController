@@ -10,10 +10,10 @@ var sensorManager = {
     writeData: function (data) {
         var query = 'INSERT INTO `greenHouse`.`metadata` (`ph_arduino_raw`,`celsius`) VALUES (' + data.ph + ', "' + data.celtius + '")';
         console.log(query)
-        mysqlClass.mysqlQuery(query)
+  /*      mysqlClass.mysqlQuery(query)
             .then(function (res) {
                 // console.log(res)
-            })
+            })*/
     },
     startMonitor: function () {
         var board = new five.Board;
@@ -23,10 +23,10 @@ var sensorManager = {
             var dataCeltius = ''
                 //get tmp data
             temperatureSensor.tmpDara(function (celtius) {
-                console.log(celtius)
-                dataCeltius = celtius
-            })
-            //get ph data
+                    console.log(celtius)
+                    dataCeltius = celtius
+                })
+                //get ph data
             setTimeout(function () {
                 dataPh = Math.floor((Math.random() * 3) + 10);
             }, 1000)
@@ -41,13 +41,31 @@ var sensorManager = {
             }, 10000)
         });
     },
-    aaa: 'ssss'
+    aaa: 'ssss',
+    startMonitorMock: function (io, data) {
+        
+        setInterval(function () {
+        var data = {
+                ph: temperatureSensor.randomTempData(),
+                celtius: temperatureSensor.randomTempData() 
+            }            
+        io.sockets.on('connection', function (socket) {
+            socket.emit('news', data);
+            socket.on('my other event', function (data) {
+                //  console.log(data);
+            });
+
+        });
+            //console.log(dataCeltius);
+            sensorManager.writeData(data)
+        },   1000)
+    }
 }
 
 
 
-sensorManager.startMonitor();
-
+//sensorManager.startMonitorMock();
+    
 
 
 
